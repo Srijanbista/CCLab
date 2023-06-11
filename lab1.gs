@@ -1,7 +1,11 @@
 function myFunction() {
   let excel = SpreadsheetApp.getActiveSpreadsheet();
   let sheet = excel.getSheetByName("Sheet1");
-  let range = sheet.getRange("B2:E5");
+  // Getting last row
+  let lastRow  = sheet.getLastRow();
+  // Getting second last Column
+  let secondLastColumn = sheet.getLastColumn()-1
+  let range = sheet.getRange(2,2,lastRow-1,secondLastColumn)
   let values = range.getValues();
 
   for (let i = 0; i < values.length; i++) {
