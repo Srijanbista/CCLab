@@ -1,4 +1,4 @@
-function myFunction() {
+function sendEmail() {
   let excel = SpreadsheetApp.getActiveSpreadsheet();
   let sheet = excel.getSheetByName("Sheet1");
   // Getting last row
