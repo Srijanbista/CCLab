@@ -1,20 +1,20 @@
 function sendEmail() {
-  let excel = SpreadsheetApp.getActiveSpreadsheet();
-  let sheet = excel.getSheetByName("Sheet1");
+  let excelApp = SpreadsheetApp.getActiveSpreadsheet();
+  let activeSheet = excelApp.getSheetByName("Sheet1");
   // Getting last row
-  let lastRow  = sheet.getLastRow();
+  let lastRow  = activeSheet.getLastRow();
   // Getting second last Column
-  let secondLastColumn = sheet.getLastColumn()-1
-  let range = sheet.getRange(2,2,lastRow-1,secondLastColumn)
-  let values = range.getValues();
+  let secondLastColumn = activeSheet.getLastColumn()-1
+  let activeRange = activeSheet.getRange(2,2,lastRow-1,secondLastColumn)
+  let values = activeRange.getValues();
 
   for (let i = 0; i < values.length; i++) {
     let status;
     let [Name, Email, Salary] = values[i];
     if (Email) {
       try {
-        let msg = buildMessage(Name, Salary);
-        MailApp.sendEmail(Email, "Salary for Month of June", msg);
+        let msgToSend = buildMessage(Name, Salary);
+        MailApp.sendEmail(Email, `Your Salary for Month of June has been credited`, msg);
         status = "success";
       } catch (err) {
         logger.log(err);
@@ -28,6 +28,6 @@ function sendEmail() {
   }
 }
 
-const buildMessage = (name, salary) => {
-  return `Hi ${name}, your salary for the month of June has been credited. Salary:${salary}`;
+const buildMessage = (employeeName, employeeSalary) => {
+  return `Hi ${employeeName}, your salary for the month of June has been credited. Salary:${employeeSalary}`;
 };
