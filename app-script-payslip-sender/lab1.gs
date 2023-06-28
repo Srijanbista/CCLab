@@ -17,7 +17,7 @@ function sendEmail() {
         MailApp.sendEmail(Email, "Salary for Month of June", msg);
         status = "success";
       } catch (err) {
-        console.log(err);
+        logger.log(err);
         status = "Fail";
       }
     } else {
